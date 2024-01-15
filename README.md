@@ -10,6 +10,8 @@ This repo is inspired by [a new paper](https://dl.acm.org/doi/pdf/10.1145/359385
 
 ## Running the Sample
 
+> 💡 This sample repo is a very "naive" implementation that uses simple database level signaling.  In a more robust system, we could use Postgres queues or an external service bus like SQS or Google Pub/Sub.
+
 To run the sample in this repository, you'll need to have Docker installed.
 
 There are two modes:
