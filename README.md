@@ -62,7 +62,7 @@ In this example, the domain is a simple project management application with only
 
 1. `Project`.  Our tasks or `WorkItem`s are associated with a `Project`.
 2. `WorkItem`.  Each `WorkItem` is linked to a single `Project` and has one or more `User` collaborators.
-3. `User`.  A simple entity representig the assignees of the `WorkItem`s
+3. `User`.  A simple entity representing the assignees of the `WorkItem`s
 
 > 💡 I didn't use the nomenclature `Task` as this is a system type name.
 
