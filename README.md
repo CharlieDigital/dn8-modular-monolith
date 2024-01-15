@@ -1,6 +1,6 @@
 # A Practical Guide to Modular Monoliths (MoMo) with .NET
 
-This repo is inspired by [a new paper](https://dl.acm.org/doi/pdf/10.1145/3593856.3595909) titled *Towards Modern Development of Cloud Applications* released by a team at Google.
+This repo is inspired by [a 2023 paper](https://dl.acm.org/doi/pdf/10.1145/3593856.3595909) titled *Towards Modern Development of Cloud Applications* released by a team at Google.
 
 ## Read Background
 
