@@ -49,7 +49,7 @@ public class WorkItemController(
   [HttpPost("/api/tasks/{taskId}/status", Name = nameof(UpdateStatus))]
   public async Task<WorkItem?> UpdateStatus(
     Guid taskId,
-    WorkItemStatus status
+    [FromBody] WorkItemStatus status
   ) {
     logger.LogDebug("Updating task status");
 

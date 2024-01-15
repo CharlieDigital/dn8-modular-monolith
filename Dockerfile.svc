@@ -8,7 +8,7 @@ ARG TARGETARCH
 ARG BUILDPLATFORM
 
 COPY ./src ./
-RUN dotnet publish ./svc1/svc1.csproj \
+RUN dotnet publish ./svc/svc.csproj \
   --output /app/published-app \
   --configuration Release \
   -a $TARGETARCH
@@ -21,6 +21,6 @@ ENV IS_CONTAINER=true
 ENV ASPNETCORE_ENVIRONMENT=Production
 
 # (5) Start our app!
-ENTRYPOINT [ "dotnet", "/app/svc1.dll" ]
+ENTRYPOINT [ "dotnet", "/app/svc.dll" ]
 
 

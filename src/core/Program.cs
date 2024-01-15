@@ -22,6 +22,7 @@ builder.Services.AddControllers()
     j.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
     j.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
   });
+
 builder.Services.AddDataStore();
 builder.Services.AddCustomServices();
 

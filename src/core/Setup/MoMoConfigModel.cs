@@ -17,6 +17,8 @@ public class Database {
       return ConnectionString;
     }
 
+    // When running in a container, we need to use the name of the service.
+    // Upstream in Cloud Run, for example, we would override the configuration.
     return ConnectionString.Replace("127.0.0.1", "postgres");
   }
 };

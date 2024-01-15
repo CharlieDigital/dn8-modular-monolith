@@ -28,6 +28,9 @@ public partial class TaskDatabase : DbContext {
     _connectionString = connectionString;
   }
 
+  /// <summary>
+  /// Set up the options for the database
+  /// </summary>
   protected override void OnConfiguring(
     DbContextOptionsBuilder optionsBuilder
   ) {
@@ -43,6 +46,9 @@ public partial class TaskDatabase : DbContext {
       .EnableSensitiveDataLogging();
   }
 
+  /// <summary>
+  /// Configure the many-to-many mapping with access to the mapping table
+  /// </summary>
   protected override void OnModelCreating(ModelBuilder modelBuilder) {
     modelBuilder.Entity<WorkItem>()
       .HasMany(e => e.Users)

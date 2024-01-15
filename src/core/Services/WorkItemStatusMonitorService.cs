@@ -11,7 +11,7 @@ namespace ChrlsChn.Momo.Services;
 /// Instead of a micro-service, we just us it as a module in the monolith.
 /// </summary>
 public class WorkItemStatusMonitorService(IOptions<MoMoConfig> options) : BackgroundServiceBase(options) {
-  protected override int Interval => 2500;
+  protected override int Interval => 3000;
 
   /// <summary>
   /// A simple in-memory store for the items we've already processed;

@@ -41,7 +41,9 @@ services:
     image: momo/svc1
     build:
       context: ./
-      dockerfile: ./Dockerfile.svc1
+      dockerfile: ./Dockerfile.svc
+    environment:
+      - SVC_ROLE=WorkItemStatusMonitorService
     depends_on:
       - api
     networks:
@@ -51,7 +53,9 @@ services:
     image: momo/svc2
     build:
       context: ./
-      dockerfile: ./Dockerfile.svc2
+      dockerfile: ./Dockerfile.svc
+    environment:
+      - SVC_ROLE=WorkItemMonitorService
     depends_on:
       - api
     networks:
