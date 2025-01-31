@@ -8,8 +8,6 @@ This repo is inspired by [a new paper](https://dl.acm.org/doi/pdf/10.1145/359385
 
 ⮑ Read more here: https://chrlschn.dev/blog/2024/01/a-practical-guide-to-modular-monoliths/
 
----
-
 ## Running the Sample
 
 > 💡 This sample repo is a very "naive" implementation that uses simple database level signaling.  In a more robust system, we could use Postgres queues or an external service bus like SQS or Google Pub/Sub.
@@ -134,8 +132,6 @@ Console output when the task status is updated to `Completed`:
 
 ![Console output when the task status is updated to Completed](./images/update-project-status.png)
 
----
-
 ## Multiple Web Service APIs
 
 In this project, I've set up an example of how to output two different sets of OpenAPI endpoints based on whether it's an "admin" or "default" function.
@@ -179,8 +175,6 @@ The previous config will still load both sets of controllers.
 In practice, there are multiple ways that this can be achieved without segregating services and using a monolith.  For example, it is possible to simply route some traffic like `https://users.example.com` to one set of servers and `https://items.example.com` to another set of servers.  This would still allow tuning of services by different concerns in terms of scaling the servers (e.g. `items` needs bigger instances while `users` can use smaller ones).
 
 However, if this is important, we can also segregate the services at runtime.
-
----
 
 ## Multiple Web Service APIs
 
