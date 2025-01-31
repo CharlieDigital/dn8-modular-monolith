@@ -178,6 +178,52 @@ The previous config will still load both sets of controllers.
 
 In practice, there are multiple ways that this can be achieved without segregating services and using a monolith.  For example, it is possible to simply route some traffic like `https://users.example.com` to one set of servers and `https://items.example.com` to another set of servers.  This would still allow tuning of services by different concerns in terms of scaling the servers (e.g. `items` needs bigger instances while `users` can use smaller ones).
 
+However, if this is important, we can also segregate the services at runtime.
+
+---
+
+## Multiple Web Service APIs
+
+In this project, I've set up an example of how to output two different sets of OpenAPI endpoints based on whether it's an "admin" or "default" function.
+
+This is done using the code in `SetupSwaggerExtension.cs` and the code in `Program.cs`:
+
+```cs
+if (RuntimeEnv.IsDevelopment)
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.ShowCommonExtensions();
+
+        // Set up the endpoints
+        options.SwaggerEndpoint("v1-api/swagger.json", "Default API");
+        options.SwaggerEndpoint("v1-admin/swagger.json", "Admin API");
+    });
+}
+```
+
+You can load the APIs from the Swagger UI: `https://localhost:5228/swagger`
+
+If you run the following commands, you can generate the OpenAPI spec and use that to generate TypeScript bindings, for example:
+
+```bash
+# Linux, Mac
+GEN=true dotnet build
+
+# Windows
+SET GEN=true
+dotnet build
+```
+
+This will output the files to `src/api-spec`
+
+### Loading Different Controllers at Runtime
+
+The previous config will still load both sets of controllers.
+
+In practice, there are multiple ways that this can be achieved without segregating services and using a monolith.  For example, it is possible to simply route some traffic like `https://users.example.com` to one set of servers and `https://items.example.com` to another set of servers.  This would still allow tuning of services by different concerns in terms of scaling the servers (e.g. `items` needs bigger instances while `users` can use smaller ones).
+
 However, if this is important, we can also segregate the services at runtime.  This is done in the `Setup/AddCustomControllers` class where we detect if there is an environment variable that defines the enabled routes (`ENABLE_ADMIN_ROUTES` and/or `ENABLE_DEFAULT_ROUTES`) and then decide which controller types we load using a custom loader.
 
 ```cs
