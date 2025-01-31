@@ -1,13 +1,18 @@
 namespace ChrlsChn.MoMo.Setup;
 
-public static class RuntimeEnv {
-  /// <summary>
-  /// True when either `ASPNETCORE_ENVIRONMENT` or `DOTNET_ENVIRONMENT`
-  /// are present in the environment variables and equal to "Development"
-  /// </summary>
-  public static bool IsDevelopment =>
-    Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")
-      == Environments.Development
-    || Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")
-      == Environments.Development;
+public static class RuntimeEnv
+{
+    /// <summary>
+    /// True when either `ASPNETCORE_ENVIRONMENT` or `DOTNET_ENVIRONMENT`
+    /// are present in the environment variables and equal to "Development"
+    /// </summary>
+    public static bool IsDevelopment =>
+        Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == Environments.Development
+        || Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") == Environments.Development;
+
+    /// <summary>
+    /// True when running code generation.
+    /// </summary>
+    public static bool IsCodegen =>
+        Environment.GetEnvironmentVariable("GEN")?.Trim().ToLowerInvariant() == "true";
 }

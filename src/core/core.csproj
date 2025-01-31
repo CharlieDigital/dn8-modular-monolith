@@ -6,13 +6,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
     <RootNamespace>ChrlsChn.Momo</RootNamespace>
-    <NoWarn>CA1848</NoWarn>
+    <NoWarn>CA1848;CS1591</NoWarn>
+    <!-- Generate XML documentation for Swagger docs; see SetupSwagger.cs -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="EFCore.NamingConventions" Version="8.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.2" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="6.9.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,5 +24,19 @@
       <Link>.pgdata</Link>
     </Folder>
   </ItemGroup>
+
+  <!--
+    Generates the OpenAPI schema file into api-spec directory.
+
+    GET=true dotnet build
+  -->
+  <Target Name="Swagger" AfterTargets="Build" Condition="$(Configuration)=='Debug' And $(GEN)=='true'">
+    <Message Text="Generating OpenAPI schema file." Importance="high" />
+    <Exec Command="dotnet tool restore" />
+    <!-- Generate the external API.  See SetupSwagger for this doc. -->
+    <Exec Command="dotnet swagger tofile --output ../api-spec/schema-api.json $(OutputPath)$(AssemblyName).dll v1-api" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" WorkingDirectory="$(ProjectDir)" />
+    <!-- Generate the admin API.  See SetupSwagger for this doc. -->
+    <Exec Command="dotnet swagger tofile --output ../api-spec/schema-admin.json $(OutputPath)$(AssemblyName).dll v1-admin" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" WorkingDirectory="$(ProjectDir)" />
+  </Target>
 
 </Project>

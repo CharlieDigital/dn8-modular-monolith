@@ -8,34 +8,48 @@ using ChrlsChn.MoMo.Setup;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<MoMoConfig>(
-  builder.Configuration.GetSection(nameof(MoMoConfig))
-);
+builder.Services.Configure<MoMoConfig>(builder.Configuration.GetSection(nameof(MoMoConfig)));
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddControllers()
-  .AddJsonOptions(j => {
-    // Without this, the Swagger is generated incorrectly.
-    j.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    j.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-    j.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-    j.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-  });
+builder.Services.AddCustomSwagger(); // Swagger/OpenAPI config
 
-builder.Services.AddDataStore();
-builder.Services.AddCustomServices();
+builder
+    .Services.AddControllers()
+    .AddJsonOptions(j =>
+    {
+        // Without this, the Swagger is generated incorrectly.
+        j.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        j.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+        j.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+        j.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    });
+
+builder.Services.AddDataStore(); // Database
+builder.Services.AddCustomServices(); // Services
 
 var app = builder.Build();
 
-// For this demo, we delete and recreate the database each time
-using var scope = app.Services.CreateScope();
-var tasks = scope.ServiceProvider.GetService<TaskDatabase>()!;
-tasks!.Database.EnsureDeleted();
-tasks!.Database.EnsureCreated();
+// For this demo, we delete and recreate the database each time when we are not in codegen.
+if (RuntimeEnv.IsCodegen)
+{
+    using var scope = app.Services.CreateScope();
+    var tasks = scope.ServiceProvider.GetService<TaskDatabase>()!;
+    tasks!.Database.EnsureDeleted();
+    tasks!.Database.EnsureCreated();
+}
 
-app.UseSwagger();
-app.UseSwaggerUI();
+if (RuntimeEnv.IsDevelopment)
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.ShowCommonExtensions();
+
+        // Set up the endpoints
+        options.SwaggerEndpoint("v1-api/swagger.json", "Default API");
+        options.SwaggerEndpoint("v1-admin/swagger.json", "Admin API");
+    });
+}
 
 app.UseAuthorization();
 app.MapControllers();
