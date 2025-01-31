@@ -1,8 +1,6 @@
 // This runtime represents the core application API that is run as a web application.
 // But the components in this application can be run in other "hosts"
 
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using ChrlsChn.MoMo.Data;
 using ChrlsChn.MoMo.Setup;
 
@@ -12,18 +10,7 @@ builder.Services.Configure<MoMoConfig>(builder.Configuration.GetSection(nameof(M
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCustomSwagger(); // Swagger/OpenAPI config
-
-builder
-    .Services.AddControllers()
-    .AddJsonOptions(j =>
-    {
-        // Without this, the Swagger is generated incorrectly.
-        j.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-        j.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-        j.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-        j.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-    });
-
+builder.Services.AddCustomControllers();
 builder.Services.AddDataStore(); // Database
 builder.Services.AddCustomServices(); // Services
 
