@@ -46,6 +46,35 @@ During local dev, you only need to be concerned with `/src/core` since we ideall
 
 You can still have multiple class libraries (as many as you want!) and simply reference and pull them into `/src/core`.  I've implemented everything in `/src/core` for simplicity, but you can easily implement some endpoints in say `/src/api-admin` and `/src/api-main` etc. the same way that we've moved reporting endpoints into `/src/reporting`.
 
+## Quick Reference
+
+Details are below, but here are the quick references:
+
+```bash
+# 👇 Start local Postgres container from the root
+docker compose up
+# =============================
+# 👇 Generate the OpenAPI spec (for generating client bindings)
+cd src/core
+# macOS, Linux
+GEN=true dotnet build
+
+# Windows
+set GEN=true
+dotnet build
+# =============================
+# 👇 Start local dev
+cd src/core
+# No hot reload
+dotnet run
+
+# With hot reload
+dotnet watch
+# =============================
+# 👇 Start in separate containers (emulate upstream)
+docker compose -f docker-compose-run.yaml
+```
+
 ## Running the Sample
 
 > 💡 This sample repo is a very "naive" implementation that uses simple database level signaling.  In a more robust system, we could use Postgres queues or an external service bus like SQS or Google Pub/Sub.

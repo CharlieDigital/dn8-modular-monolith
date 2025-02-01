@@ -17,4 +17,10 @@ public static class RuntimeEnv
     /// </summary>
     public static bool IsCodegen =>
         Environment.GetEnvironmentVariable("GEN")?.Trim().ToLowerInvariant() == "true";
+
+    /// <summary>
+    /// True when the DB does not need to be reset.  If we are running multiple DB nodes, we don't need to keep resetting it.
+    /// </summary>
+    public static bool SkipDbReset =>
+        Environment.GetEnvironmentVariable("SKIP_DB_RESET")?.Trim().ToLowerInvariant() == "true";
 }

@@ -5,6 +5,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!--
+      👇 We need to add these two packages since we are using a class lib SDK here.
+    -->
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.3.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.1" />
   </ItemGroup>

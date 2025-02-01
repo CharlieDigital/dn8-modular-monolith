@@ -20,7 +20,7 @@ builder.Services.AddCustomServices(); // Services
 var app = builder.Build();
 
 // For this demo, we delete and recreate the database each time when we are not in codegen.
-if (!RuntimeEnv.IsCodegen)
+if (!RuntimeEnv.IsCodegen && !RuntimeEnv.SkipDbReset)
 {
     Console.WriteLine("✨ Provisioning database...");
     using var scope = app.Services.CreateScope();

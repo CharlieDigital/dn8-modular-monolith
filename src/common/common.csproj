@@ -14,6 +14,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!--
+      👇 We need to add these three packages since we are using a class lib SDK here.
+    -->
     <PackageReference Include="EFCore.NamingConventions" Version="8.0.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />

@@ -10,7 +10,7 @@
   },
   "paths": {
     "/api/reporting/{projectId}": {
-      "delete": {
+      "get": {
         "tags": [
           "Reporting"
         ],
