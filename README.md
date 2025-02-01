@@ -75,6 +75,8 @@ dotnet watch
 docker compose -f docker-compose-run.yaml
 ```
 
+Of course, the beauty of this setup is that locally, you can just pick the `src/core` project and F5 run that project to start everything.
+
 ## Running the Sample
 
 > 💡 This sample repo is a very "naive" implementation that uses simple database level signaling.  In a more robust system, we could use Postgres queues or an external service bus like SQS or Google Pub/Sub.
