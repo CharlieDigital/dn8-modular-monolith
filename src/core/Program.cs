@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<MoMoConfig>(builder.Configuration.GetSection(nameof(MoMoConfig)));
 
+Console.WriteLine("Starting app setup...");
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCustomSwagger(); // Swagger/OpenAPI config
 builder.Services.AddCustomControllers();

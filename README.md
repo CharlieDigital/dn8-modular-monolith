@@ -16,6 +16,34 @@ In short, the objective is to:
 - Have a single runtime in development so that `dotnet run` brings up everything
 - Design our runtime so that we can use the same exact codebase, but deploy different sets of services to different hosts that we can route, secure, scale, and manage independently
 
+## Organization
+
+The files are organized in the following structure from:
+
+```
+📁 src
+  📁 api-spec                 # The output target for the OpenAPI specs
+  📁 core                     # The core runtime container for local dev with web API
+                                and services.  In production, deploy this for the web API
+    📁 Controllers            # The API endpoints
+    📁 Data                   # Data model and access code; EF is configured here
+    📁 Services               # The background services
+    📁 Setup                  # The DI container setup code is organized here
+    📁 Utils                  # Small utilities
+    Program.cs                # Host setup for the web API runtime
+  📁 svc                      # Simple runtime that does not have the web API wired
+                                up; these run only the background services.
+docker-compose-run.yaml       # Run in "production" mode with nodes for each module
+docker-compose.yaml           # Start only the Postgres instance for local dev
+Dockerfile.core               # Dockerfile for building the core API runtime
+Dockerfile.svc                # Dockerfile for building the services-only runtime
+global.json                   # Tweak if you have multiple versions of .NET SDK
+```
+
+During local dev, you only need to be concerned with `/src/core` since we ideally want to have a single, all encapsulated runtime locally.
+
+You can still have multiple class libraries (as many as you want!) and simply reference and pull them into `/src/core`.  I've implemented everything in `/src/core` for simplicity, but you can easily implement some endpoints in say `/src/api-admin` and `/src/api-main` etc.
+
 ## Running the Sample
 
 > 💡 This sample repo is a very "naive" implementation that uses simple database level signaling.  In a more robust system, we could use Postgres queues or an external service bus like SQS or Google Pub/Sub.

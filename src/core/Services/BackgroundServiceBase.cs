@@ -16,6 +16,7 @@ public abstract class BackgroundServiceBase(IOptions<MoMoConfig> config) : Backg
     /// </summary>
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        // 👇 This is a simple implementation of a periodic checker; just as an example.
         using var timer = new PeriodicTimer(TimeSpan.FromMilliseconds(Interval));
 
         try
