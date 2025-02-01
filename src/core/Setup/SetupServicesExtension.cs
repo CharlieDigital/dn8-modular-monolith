@@ -1,3 +1,4 @@
+using ChrlsChn.MoMo.Common.Config;
 using ChrlsChn.Momo.Services;
 
 namespace ChrlsChn.MoMo.Setup;

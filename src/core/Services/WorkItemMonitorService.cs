@@ -1,4 +1,4 @@
-using ChrlsChn.MoMo.Setup;
+using ChrlsChn.MoMo.Common.Config;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 

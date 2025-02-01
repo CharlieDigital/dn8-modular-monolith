@@ -1,4 +1,4 @@
-using ChrlsChn.MoMo.Data;
+using ChrlsChn.MoMo.Common.Data;
 
 namespace ChrlsChn.MoMo.Setup;
 

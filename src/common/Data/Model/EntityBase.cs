@@ -1,4 +1,4 @@
-namespace ChrlsChn.MoMo.Data.Model;
+namespace ChrlsChn.MoMo.Common.Data.Model;
 
 public abstract class EntityBase
 {

@@ -1,5 +1,5 @@
-using ChrlsChn.MoMo.Data;
-using ChrlsChn.MoMo.Setup;
+using ChrlsChn.MoMo.Common.Config;
+using ChrlsChn.MoMo.Common.Data;
 using Microsoft.Extensions.Options;
 
 namespace ChrlsChn.Momo.Services;

@@ -1,5 +1,6 @@
 ﻿// This runtime does not load the REST API endpoints and only loads the services
 
+using ChrlsChn.MoMo.Common.Config;
 using ChrlsChn.Momo.Services;
 using ChrlsChn.MoMo.Setup;
 using Microsoft.Extensions.DependencyInjection;

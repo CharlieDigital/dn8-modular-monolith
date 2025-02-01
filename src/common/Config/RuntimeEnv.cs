@@ -1,4 +1,6 @@
-namespace ChrlsChn.MoMo.Setup;
+using Microsoft.Extensions.Hosting;
+
+namespace ChrlsChn.MoMo.Common.Config;
 
 public static class RuntimeEnv
 {

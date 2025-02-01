@@ -1,7 +1,8 @@
 // This runtime represents the core application API that is run as a web application.
 // But the components in this application can be run in other "hosts"
 
-using ChrlsChn.MoMo.Data;
+using ChrlsChn.MoMo.Common.Config;
+using ChrlsChn.MoMo.Common.Data;
 using ChrlsChn.MoMo.Setup;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,6 +38,7 @@ if (RuntimeEnv.IsDevelopment)
         // Set up the endpoints
         options.SwaggerEndpoint("v1-api/swagger.json", "Default API");
         options.SwaggerEndpoint("v1-admin/swagger.json", "Admin API");
+        options.SwaggerEndpoint("v1-reporting/swagger.json", "Reporting API");
     });
 }
 

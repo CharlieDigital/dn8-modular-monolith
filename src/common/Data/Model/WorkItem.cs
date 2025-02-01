@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
-namespace ChrlsChn.MoMo.Data.Model;
+namespace ChrlsChn.MoMo.Common.Data.Model;
 
 public class WorkItem : EntityBase
 {

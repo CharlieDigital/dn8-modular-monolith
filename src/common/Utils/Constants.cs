@@ -1,4 +1,4 @@
-namespace ChrlsChn.MoMo.Utils;
+namespace ChrlsChn.MoMo.Common.Utils;
 
 /// <summary>
 /// Constants for the app.
@@ -14,4 +14,9 @@ public static class Constants
     /// Default API group
     /// </summary>
     public const string DefaultApiGroup = "v1-api";
+
+    /// <summary>
+    /// Reporting API group
+    /// </summary>
+    public const string ReportingApiGroup = "v1-reporting";
 }

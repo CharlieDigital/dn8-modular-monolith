@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace ChrlsChn.MoMo.Data.Model;
+namespace ChrlsChn.MoMo.Common.Data.Model;
 
 [PrimaryKey(nameof(WorkItemId), nameof(UserId))]
 public class WorkItemUser

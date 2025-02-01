@@ -1,9 +1,9 @@
-using ChrlsChn.MoMo.Data.Model;
-using ChrlsChn.MoMo.Setup;
+using ChrlsChn.MoMo.Common.Config;
+using ChrlsChn.MoMo.Common.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace ChrlsChn.MoMo.Data;
+namespace ChrlsChn.MoMo.Common.Data;
 
 /// <summary>
 /// Partial class for the database which contains the main setup code.

@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using ChrlsChn.MoMo.Controllers;
+using ChrlsChn.MoMo.Reporting.Controllers;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 
@@ -19,7 +20,10 @@ public static class SetupControllersExtension
             Environment.GetEnvironmentVariable("ENABLE_ADMIN_ROUTES") == "true";
         var loadApiControllers =
             Environment.GetEnvironmentVariable("ENABLE_DEFAULT_ROUTES") == "true";
-        var loadDefault = !(loadAdminControllers || loadApiControllers);
+        var loadReportingControllers =
+            Environment.GetEnvironmentVariable("ENABLE_REPORTING_ROUTES") == "true";
+
+        var loadDefault = !(loadAdminControllers || loadApiControllers || loadReportingControllers);
 
         static void ConfigJsonOptions(Microsoft.AspNetCore.Mvc.JsonOptions j)
         {
@@ -47,14 +51,22 @@ public static class SetupControllersExtension
 
             if (loadAdminControllers)
             {
+                Console.WriteLine("   ⮑  Loading admin controllers");
                 enabledControllers.Add(typeof(AdminController));
             }
 
             if (loadApiControllers)
             {
+                Console.WriteLine("   ⮑  Loading API controllers");
                 enabledControllers.Add(typeof(ProjectController));
                 enabledControllers.Add(typeof(UserController));
                 enabledControllers.Add(typeof(WorkItemController));
+            }
+
+            if (loadReportingControllers)
+            {
+                Console.WriteLine("   ⮑  Loading reporting controllers");
+                enabledControllers.Add(typeof(ReportingController));
             }
 
             // Partition the controllers and load only the enabled ones.

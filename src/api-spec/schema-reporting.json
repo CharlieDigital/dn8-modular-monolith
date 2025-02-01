@@ -1,0 +1,55 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Reporting API",
+    "description": "Reporting API",
+    "contact": {
+      "name": "MoMo Reporting API"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/api/reporting/{projectId}": {
+      "delete": {
+        "tags": [
+          "Reporting"
+        ],
+        "operationId": "GenerateProjectReportCsv",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": { }
+}

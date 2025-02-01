@@ -25,6 +25,11 @@
     </Folder>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\reporting\reporting.csproj" />
+    <ProjectReference Include="..\common\common.csproj" />
+  </ItemGroup>
+
   <!--
     👇 Generates the OpenAPI schema file into api-spec directory.
   -->
@@ -35,6 +40,8 @@
     <Exec Command="dotnet swagger tofile --output ../api-spec/schema-api.json $(OutputPath)$(AssemblyName).dll v1-api" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" WorkingDirectory="$(ProjectDir)" />
     <!-- Generate the admin API.  See SetupSwagger for this doc. -->
     <Exec Command="dotnet swagger tofile --output ../api-spec/schema-admin.json $(OutputPath)$(AssemblyName).dll v1-admin" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" WorkingDirectory="$(ProjectDir)" />
+    <!-- Generate the reporting API.  See SetupSwagger for this doc. -->
+    <Exec Command="dotnet swagger tofile --output ../api-spec/schema-reporting.json $(OutputPath)$(AssemblyName).dll v1-reporting" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" WorkingDirectory="$(ProjectDir)" />
   </Target>
 
 </Project>

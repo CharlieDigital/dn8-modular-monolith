@@ -1,4 +1,4 @@
-using ChrlsChn.MoMo.Utils;
+using ChrlsChn.MoMo.Common.Utils;
 
 namespace ChrlsChn.MoMo.Setup;
 
@@ -40,7 +40,19 @@ public static class SetupSwaggerExtension
                     Version = "v1",
                     Title = "Admin API",
                     Description = "Admin API",
-                    Contact = new() { Name = "MoMo Amin API", }
+                    Contact = new() { Name = "MoMo Admin API", }
+                }
+            );
+
+            // The reporting API docs
+            config.SwaggerDoc(
+                "v1-reporting",
+                new()
+                {
+                    Version = "v1",
+                    Title = "Reporting API",
+                    Description = "Reporting API",
+                    Contact = new() { Name = "MoMo Reporting API", }
                 }
             );
 
@@ -58,6 +70,12 @@ public static class SetupSwaggerExtension
                     {
                         // Only return true if it's a default API group
                         return def.GroupName == Constants.DefaultApiGroup;
+                    }
+
+                    if (name == "v1-reporting")
+                    {
+                        // Only return true if it's a reporting API group
+                        return def.GroupName == Constants.ReportingApiGroup;
                     }
 
                     // Untagged endpoints are counted as the default API

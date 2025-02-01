@@ -266,6 +266,8 @@ if (loadApiControllers) // Load API controllers
 
 In this example, we are loading types from a single assembly, but it is also possible to load types from any number of assemblies allowing you to, for example, have a separate project for `MoMo.Api.Admin`, `MoMo.Api.Core`, and `MoMo.Api.Reporting`.
 
+> 💡 You can separate your controllers into as many assemblies as you want within the monolith if it makes it easier to manage your codebase; there's no need to put them all into one assembly.
+
 You can be more clever here and write better code to resolve/filter the types to load or add more options here to load different sets of services.
 
 In local development, when no environment variable is provided, it just follows the normal loading logic and all routes are loaded.
@@ -276,3 +278,17 @@ With this approach, now you can map (macOS commands):
 - `https://admin-api.example.com` → a set of nodes running `ENABLE_ADMIN_ROUTES=true dotnet run`
 
 So that each set of nodes only exposes the relevant routes.
+
+## Do You Need Two Hosts?
+
+Strictly speaking, the answer is "no"; we could do everything in one host (one `Program.cs`).  You'll notice that in `src/core/Program.cs` and `src/svc/Program.cs`, though, we do end up configuring different hosts:
+
+```cs
+// src/core/Program.cs
+var builder = WebApplication.CreateBuilder(args);
+
+// src/svc/Program.cs
+var builder = Host.CreateApplicationBuilder(args);
+```
+
+Not only that, we don't need any of the facilities for hosting web endpoints if we are only running the background services.  It is also possible to just move all of the code into one host setup instead by simply initializing different builders.

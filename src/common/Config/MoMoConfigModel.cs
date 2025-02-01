@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace ChrlsChn.MoMo.Setup;
+namespace ChrlsChn.MoMo.Common.Config;
 
 /// <summary>
 /// Configuration model for the database
