@@ -30,7 +30,7 @@
 
     GET=true dotnet build
   -->
-  <Target Name="Swagger" AfterTargets="Build" Condition="$(Configuration)=='Debug' And $(GEN)=='true'">
+  <Target Name="GenerateSpec" AfterTargets="Build" Condition="$(Configuration)=='Gen' Or $(GEN)=='true'">
     <Message Text="Generating OpenAPI schema file." Importance="high" />
     <Exec Command="dotnet tool restore" />
     <!-- Generate the external API.  See SetupSwagger for this doc. -->

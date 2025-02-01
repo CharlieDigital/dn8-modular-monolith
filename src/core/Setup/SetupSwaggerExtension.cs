@@ -20,6 +20,7 @@ public static class SetupSwaggerExtension
 
             config.DescribeAllParametersInCamelCase();
 
+            // The main API docs
             config.SwaggerDoc(
                 "v1-api",
                 new()
@@ -31,6 +32,7 @@ public static class SetupSwaggerExtension
                 }
             );
 
+            // The admin API docs
             config.SwaggerDoc(
                 "v1-admin",
                 new()

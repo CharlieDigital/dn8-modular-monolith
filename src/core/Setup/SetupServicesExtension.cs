@@ -9,6 +9,7 @@ public static class SetupServicesExtension
     /// </summary>
     public static void AddCustomServices(this IServiceCollection services)
     {
+        // 👇 In the development environment, we load BOTH services into the runtime
         if (RuntimeEnv.IsDevelopment && !RuntimeEnv.IsCodegen)
         {
             services.AddHostedService<WorkItemMonitorService>();
