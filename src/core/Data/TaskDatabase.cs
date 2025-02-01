@@ -40,7 +40,9 @@ public partial class TaskDatabase : DbContext
 
         if (RuntimeEnv.IsCodegen)
         {
-            // For codegen, we simply connect an in-memory database for DI
+            Console.WriteLine("  ⮑  Starting database in codegen");
+
+            // 👇 For codegen, we simply connect an in-memory database for DI
             optionsBuilder.UseInMemoryDatabase("codegen");
         }
         else

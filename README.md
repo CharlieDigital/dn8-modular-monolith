@@ -198,7 +198,8 @@ If you run the following commands, you can generate the OpenAPI spec and use tha
 GEN=true dotnet build
 
 # Linux, macOS, Windows
-dotnet build --configuration Gen
+set GEN=true
+dotnet build
 ```
 
 This will output the files to `src/api-spec` which can be used to generate TypeScript bindings, for example.
