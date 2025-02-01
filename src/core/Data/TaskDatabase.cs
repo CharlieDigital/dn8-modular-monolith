@@ -38,21 +38,11 @@ public partial class TaskDatabase : DbContext
             return;
         }
 
-        if (RuntimeEnv.IsCodegen)
-        {
-            Console.WriteLine("  ⮑  Starting database in codegen");
-
-            // 👇 For codegen, we simply connect an in-memory database for DI
-            optionsBuilder.UseInMemoryDatabase("codegen");
-        }
-        else
-        {
-            optionsBuilder
-                .UseNpgsql(_connectionString, o => o.UseAdminDatabase("postgres"))
-                .UseSnakeCaseNamingConvention()
-                .EnableDetailedErrors()
-                .EnableSensitiveDataLogging();
-        }
+        optionsBuilder
+            .UseNpgsql(_connectionString, o => o.UseAdminDatabase("postgres"))
+            .UseSnakeCaseNamingConvention()
+            .EnableDetailedErrors()
+            .EnableSensitiveDataLogging();
     }
 
     /// <summary>
