@@ -12,7 +12,7 @@ namespace ChrlsChn.MoMo.Controllers;
 [ApiController]
 public class AdminController(ILogger<AdminController> logger, TaskDatabase database)
 {
-    // 👇 Note here we are specifically identify a group name
+    // 👇 Note here we are specifically identifying a group name
     [ApiExplorerSettings(GroupName = Constants.AdminApiGroup)]
     [HttpDelete("/api/users/delete/{userId}", Name = nameof(DeleteUser))]
     public async Task DeleteUser(Guid userId)
@@ -22,7 +22,7 @@ public class AdminController(ILogger<AdminController> logger, TaskDatabase datab
         await database.Users.Where(u => u.Id == userId).ExecuteDeleteAsync();
     }
 
-    // 👇 Note here we are specifically identify a group name
+    // 👇 Note here we are specifically identifying a group name
     [ApiExplorerSettings(GroupName = Constants.AdminApiGroup)]
     [HttpDelete("/api/project/delete/{projectId}", Name = nameof(DeleteProject))]
     public async Task DeleteProject(Guid projectId)
@@ -32,7 +32,7 @@ public class AdminController(ILogger<AdminController> logger, TaskDatabase datab
         await database.Projects.Where(p => p.Id == projectId).ExecuteDeleteAsync();
     }
 
-    // 👇 Note here we are specifically identify a group name
+    // 👇 Note here we are specifically identifying a group name
     [ApiExplorerSettings(GroupName = Constants.AdminApiGroup)]
     [HttpDelete("/api/tasks/delete/{workItemId}", Name = nameof(DeleteWorkItem))]
     public async Task DeleteWorkItem(Guid workItemId)

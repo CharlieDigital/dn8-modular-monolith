@@ -166,13 +166,13 @@ This requires that we label our APIs like so using `ApiExplorerSettings.GroupNam
 
 ```cs
 // AdminController.cs
-// 👇 Note here we are specifically identify a group name
+// 👇 Note here we are specifically identifying a group name
 [ApiExplorerSettings(GroupName = Constants.AdminApiGroup)]
 [HttpDelete("/api/users/delete/{userId}", Name = nameof(DeleteUser))]
 public async Task DeleteUser(Guid userId) { /* ... */ }
 
 // UserController.cs
-// 👇 Note here we are specifically identify a group name
+// 👇 Note here we are specifically identifying a group name
 [ApiExplorerSettings(GroupName = Constants.DefaultApiGroup)]
 [HttpGet("/api/users", Name = nameof(GetUsers))]
 public async Task<IEnumerable<User>> GetUsers() { /* ... */ }
