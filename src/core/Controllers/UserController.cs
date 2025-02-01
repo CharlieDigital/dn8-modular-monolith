@@ -13,7 +13,7 @@ public class UserController(ILogger<ProjectController> logger, TaskDatabase data
     [HttpGet("/api/users", Name = nameof(GetUsers))]
     public async Task<IEnumerable<User>> GetUsers()
     {
-        logger.LogDebug("Getting users");
+        logger.LogInformation("Getting users");
 
         return await database.Users.ToListAsync();
     }
@@ -22,7 +22,7 @@ public class UserController(ILogger<ProjectController> logger, TaskDatabase data
     [HttpPost("/api/users/add", Name = nameof(AddUser))]
     public async Task<User> AddUser(User user)
     {
-        logger.LogDebug("Adding user");
+        logger.LogInformation("Adding user");
 
         await database.Users.AddAsync(user);
 

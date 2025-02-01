@@ -17,7 +17,7 @@ public class AdminController(ILogger<AdminController> logger, TaskDatabase datab
     [HttpDelete("/api/users/delete/{userId}", Name = nameof(DeleteUser))]
     public async Task DeleteUser(Guid userId)
     {
-        logger.LogDebug("[ADMIN] Deleting user");
+        logger.LogInformation("[ADMIN] Deleting user");
 
         await database.Users.Where(u => u.Id == userId).ExecuteDeleteAsync();
     }
@@ -27,7 +27,7 @@ public class AdminController(ILogger<AdminController> logger, TaskDatabase datab
     [HttpDelete("/api/project/delete/{projectId}", Name = nameof(DeleteProject))]
     public async Task DeleteProject(Guid projectId)
     {
-        logger.LogDebug("[ADMIN] Deleting project");
+        logger.LogInformation("[ADMIN] Deleting project");
 
         await database.Projects.Where(p => p.Id == projectId).ExecuteDeleteAsync();
     }
@@ -37,7 +37,7 @@ public class AdminController(ILogger<AdminController> logger, TaskDatabase datab
     [HttpDelete("/api/tasks/delete/{workItemId}", Name = nameof(DeleteWorkItem))]
     public async Task DeleteWorkItem(Guid workItemId)
     {
-        logger.LogDebug("[ADMIN] Deleting work item");
+        logger.LogInformation("[ADMIN] Deleting work item");
 
         await database.WorkItems.Where(w => w.Id == workItemId).ExecuteDeleteAsync();
     }

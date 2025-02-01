@@ -1,4 +1,4 @@
-using ChrlsChn.MoMo.Data.Model;
+using ChrlsChn.MoMo.Common.Data.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace tests;

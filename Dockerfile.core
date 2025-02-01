@@ -1,6 +1,6 @@
 # See: https://devblogs.microsoft.com/dotnet/improving-multiplatform-container-support/
 # (1) The build environment
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 as build
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # See: https://docs.docker.com/engine/reference/builder/#automatic-platform-args-in-the-global-scope
@@ -13,7 +13,7 @@ RUN dotnet publish ./core/core.csproj \
   --configuration Release \
   -a $TARGETARCH
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 as runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/published-app /app
 
@@ -22,5 +22,3 @@ ENV ASPNETCORE_ENVIRONMENT=Production
 
 # (5) Start our app!
 ENTRYPOINT [ "dotnet", "/app/core.dll" ]
-
-

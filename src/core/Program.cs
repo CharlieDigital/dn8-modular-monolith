@@ -22,6 +22,7 @@ var app = builder.Build();
 // For this demo, we delete and recreate the database each time when we are not in codegen.
 if (!RuntimeEnv.IsCodegen)
 {
+    Console.WriteLine("✨ Provisioning database...");
     using var scope = app.Services.CreateScope();
     var tasks = scope.ServiceProvider.GetService<TaskDatabase>()!;
     tasks!.Database.EnsureDeleted();

@@ -10,12 +10,12 @@ public class ReportingController(ILogger<ReportingController> logger, TaskDataba
 {
     // 👇 Note here we are specifically identifying a group name
     [ApiExplorerSettings(GroupName = Constants.ReportingApiGroup)]
-    [HttpDelete("/api/reporting/{projectId}", Name = nameof(GenerateProjectReportCsv))]
+    [HttpGet("/api/reporting/{projectId}", Name = nameof(GenerateProjectReportCsv))]
     public async Task<string> GenerateProjectReportCsv(Guid projectId)
     {
-        logger.LogDebug("[REPORTING] Generating project report for: {ProjectId}", projectId);
+        logger.LogInformation("[REPORTING] Generating project report for: {ProjectId}", projectId);
 
         // TODO: Actual CSV report
-        return await Task.FromResult("");
+        return await Task.FromResult("a,b,c");
     }
 }

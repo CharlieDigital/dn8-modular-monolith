@@ -14,7 +14,7 @@ public class WorkItemController(ILogger<ProjectController> logger, TaskDatabase 
     [HttpGet("/api/tasks", Name = nameof(GetWorkItems))]
     public async Task<IEnumerable<WorkItem>> GetWorkItems()
     {
-        logger.LogDebug("Getting tasks");
+        logger.LogInformation("Getting tasks");
 
         return await database.WorkItems.ToListAsync();
     }
@@ -23,7 +23,7 @@ public class WorkItemController(ILogger<ProjectController> logger, TaskDatabase 
     [HttpPost("/api/tasks/add", Name = nameof(AddWorkItem))]
     public async Task<WorkItem> AddWorkItem(AddWorkItemRequest request)
     {
-        logger.LogDebug("Adding task");
+        logger.LogInformation("Adding task");
 
         var workItem = new WorkItem
         {
@@ -54,7 +54,7 @@ public class WorkItemController(ILogger<ProjectController> logger, TaskDatabase 
     [HttpPost("/api/tasks/{taskId}/status", Name = nameof(UpdateStatus))]
     public async Task<WorkItem?> UpdateStatus(Guid taskId, [FromBody] WorkItemStatus status)
     {
-        logger.LogDebug("Updating task status");
+        logger.LogInformation("Updating task status");
 
         var task = await database.WorkItems.FirstOrDefaultAsync(t => t.Id == taskId);
 

@@ -23,14 +23,16 @@ The files are organized in the following structure from:
 ```
 📁 src
   📁 api-spec                 # The output target for the OpenAPI specs
+  📁 common                   # Common dependencies to prevent circular references
+    📁 Utils                  # Shared utilities
+    📁 Data                   # Data model and access code; EF is configured here
   📁 core                     # The core runtime container for local dev with web API
                                 and services.  In production, deploy this for the web API
     📁 Controllers            # The API endpoints
-    📁 Data                   # Data model and access code; EF is configured here
     📁 Services               # The background services
     📁 Setup                  # The DI container setup code is organized here
-    📁 Utils                  # Small utilities
     Program.cs                # Host setup for the web API runtime
+  📁 reporting                # Standalone set of controllers for reporting
   📁 svc                      # Simple runtime that does not have the web API wired
                                 up; these run only the background services.
 docker-compose-run.yaml       # Run in "production" mode with nodes for each module
@@ -42,7 +44,7 @@ global.json                   # Tweak if you have multiple versions of .NET SDK
 
 During local dev, you only need to be concerned with `/src/core` since we ideally want to have a single, all encapsulated runtime locally.
 
-You can still have multiple class libraries (as many as you want!) and simply reference and pull them into `/src/core`.  I've implemented everything in `/src/core` for simplicity, but you can easily implement some endpoints in say `/src/api-admin` and `/src/api-main` etc.
+You can still have multiple class libraries (as many as you want!) and simply reference and pull them into `/src/core`.  I've implemented everything in `/src/core` for simplicity, but you can easily implement some endpoints in say `/src/api-admin` and `/src/api-main` etc. the same way that we've moved reporting endpoints into `/src/reporting`.
 
 ## Running the Sample
 
@@ -112,6 +114,7 @@ From here, follow these steps:
 To execute this in `curl`:
 
 ```bash
+# 💡 Use port 8080 when running in runtime mode
 # Add the project and note the response ID
 curl -X 'POST' \
   'http://localhost:5228/api/projects/add' \
