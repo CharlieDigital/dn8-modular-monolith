@@ -15,7 +15,7 @@ public class DataStoreTests : IClassFixture<DatabaseFixture>
             Id = Guid.NewGuid(),
             Name = "Project 1",
             CreatedUtc = DateTimeOffset.UtcNow,
-            Status = ProjectStatus.NotStarted
+            CurrentStatus = ProjectStatus.NotStarted
         };
 
         await db.Database.BeginTransactionAsync();
@@ -44,7 +44,7 @@ public class DataStoreTests : IClassFixture<DatabaseFixture>
             Id = Guid.NewGuid(),
             Name = "Project 1",
             CreatedUtc = now,
-            Status = ProjectStatus.NotStarted,
+            CurrentStatus = ProjectStatus.NotStarted,
             WorkItems =
             [
                 new()
@@ -113,7 +113,7 @@ public class DataStoreTests : IClassFixture<DatabaseFixture>
             Id = Guid.NewGuid(),
             Name = "Project 1",
             CreatedUtc = now,
-            Status = ProjectStatus.NotStarted,
+            CurrentStatus = ProjectStatus.NotStarted,
             WorkItems =
             [
                 new()

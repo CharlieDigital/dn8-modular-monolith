@@ -14,7 +14,7 @@ public class ProjectController(ILogger<ProjectController> logger, TaskDatabase d
     [HttpGet("/api/projects/", Name = nameof(GetProjects))]
     public async Task<IEnumerable<Project>> GetProjects()
     {
-        logger.LogInformation("Getting projects");
+        logger.LogInformation("[PROJECT] Getting projects");
 
         return await database.Projects.ToListAsync();
     }
@@ -23,14 +23,14 @@ public class ProjectController(ILogger<ProjectController> logger, TaskDatabase d
     [HttpPost("/api/projects/add", Name = nameof(AddProject))]
     public async Task<Project> AddProject([FromBody] string name)
     {
-        logger.LogInformation("Adding project");
+        logger.LogInformation("[PROJECT] Adding project");
 
         var project = new Project
         {
             Id = Guid.NewGuid(),
             Name = name,
             CreatedUtc = DateTimeOffset.UtcNow,
-            Status = ProjectStatus.NotStarted
+            CurrentStatus = ProjectStatus.NotStarted
         };
 
         await database.AddAsync(project);

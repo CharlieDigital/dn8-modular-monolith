@@ -42,9 +42,11 @@ Dockerfile.svc                # Dockerfile for building the services-only runtim
 global.json                   # Tweak if you have multiple versions of .NET SDK
 ```
 
+> 💡 This repo is configured to run against .NET 8 SDK using the `/global.json` file at the root. If you want to use a different version, tweak this file.
+
 During local dev, you only need to be concerned with `/src/core` since we ideally want to have a single, all encapsulated runtime locally.
 
-You can still have multiple class libraries (as many as you want!) and simply reference and pull them into `/src/core`.  I've implemented everything in `/src/core` for simplicity, but you can easily implement some endpoints in say `/src/api-admin` and `/src/api-main` etc. the same way that we've moved reporting endpoints into `/src/reporting`.
+You can still have multiple class libraries (as many as you want!) and simply reference and pull them into `/src/core`.  I've implemented most of the endpoints in `/src/core` for simplicity, but you can easily implement some endpoints in say `/src/api-admin` and `/src/api-main` etc. the same way that we've moved reporting endpoints into `/src/reporting`.
 
 ## Quick Reference
 
@@ -108,8 +110,11 @@ In this mode, the Docker Compose file is responsible only for running our Postgr
 To run in runtime mode (as it would be in production):
 
 ```shell
-# API is at port 8080
+# API is at port 8080 and 8081 (force rebuild 👇)
 docker compose -f docker-compose-run.yaml up --build
+
+# API is at port 8080 and 8081 (no rebuild)
+docker compose -f docker-compose-run.yaml up
 ```
 
 In this mode, the Docker Compose file is responsible for building and running 4 containers:
@@ -119,18 +124,19 @@ In this mode, the Docker Compose file is responsible for building and running 4 
 3. The .NET host for the service to notify `WorkItem` collaborator `User`s
 4. The .NET host for the service to check and update the `Project` for a `WorkItem` if all of the `Project`'s `WorkItem`s are completed.
 
-Each container contains a host that loads a slice of the workload.
+Each container contains a host that loads a slice of the workload.  This represents what your deployment topology might look like upstream in an environment like GKE, ECS, AKS, or even deployed into EC2 instances.
 
 ### Testing
 
 To test the example, use the following URLs to access the Swagger UI:
 
 ```
-# In development mode
+# In development mode (all)
 http://localhost:5228/swagger
 
 # In runtime mode
-http://localhost:8080/swagger
+http://localhost:8080/swagger // 👈 Default, Reporting
+http://localhost:8081/swagger // 👈 Admin
 ```
 
 From here, follow these steps:
@@ -220,6 +226,7 @@ if (RuntimeEnv.IsDevelopment)
         // Set up the endpoints
         options.SwaggerEndpoint("v1-api/swagger.json", "Default API");
         options.SwaggerEndpoint("v1-admin/swagger.json", "Admin API");
+        // ...
     });
 }
 ```

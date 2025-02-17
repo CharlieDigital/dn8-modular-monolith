@@ -55,7 +55,7 @@ public class WorkItemStatusMonitorService(IOptions<MoMoConfig> options)
                 if (w.Project.WorkItems.TrueForAll(i => i.Status == WorkItemStatus.Completed))
                 {
                     // Update the project status
-                    w.Project.Status = ProjectStatus.Completed;
+                    w.Project.CurrentStatus = ProjectStatus.Completed;
 
                     await Database.SaveChangesAsync(c);
 

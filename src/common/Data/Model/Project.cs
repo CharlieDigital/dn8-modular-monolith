@@ -4,7 +4,7 @@ namespace ChrlsChn.MoMo.Common.Data.Model;
 
 public class Project : EntityBase
 {
-    public required ProjectStatus Status { get; set; }
+    public required ProjectStatus CurrentStatus { get; set; }
 
     [JsonIgnore]
     public List<WorkItem> WorkItems { get; set; } = [];

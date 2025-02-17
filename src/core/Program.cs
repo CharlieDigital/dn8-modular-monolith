@@ -22,21 +22,22 @@ var app = builder.Build();
 // For this demo, we delete and recreate the database each time when we are not in codegen.
 if (!RuntimeEnv.IsCodegen && !RuntimeEnv.SkipDbReset)
 {
-    Console.WriteLine("✨ Provisioning database...");
+    Console.WriteLine("✨ Provisioning database..."); // 👈 Reset the database each time
     using var scope = app.Services.CreateScope();
     var tasks = scope.ServiceProvider.GetService<TaskDatabase>()!;
     tasks!.Database.EnsureDeleted();
     tasks!.Database.EnsureCreated();
 }
 
-if (RuntimeEnv.IsDevelopment)
+// 👇 Only expose the swagger UI if we're in development or we explicitly want to
+if (RuntimeEnv.IsDevelopment || RuntimeEnv.ExposeSwaggerUI)
 {
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
         options.ShowCommonExtensions();
 
-        // Set up the endpoints
+        // 👇 Note that we set up 3 endpoints for the different services.
         options.SwaggerEndpoint("v1-api/swagger.json", "Default API");
         options.SwaggerEndpoint("v1-admin/swagger.json", "Admin API");
         options.SwaggerEndpoint("v1-reporting/swagger.json", "Reporting API");

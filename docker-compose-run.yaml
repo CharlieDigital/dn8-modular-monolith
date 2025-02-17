@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 
 # Use this spec to run all of the code in separate services.
 
@@ -32,6 +32,7 @@ services:
     environment:
       - ENABLE_DEFAULT_ROUTES=true # Load default routes
       - ENABLE_REPORTING_ROUTES=true # Load reporting routes
+      - EXPOSE_SWAGGER_UI=true # Just for local demo
     expose:
       - 8080
     ports:
@@ -41,7 +42,7 @@ services:
     networks:
       - momo
 
-  # The main API instance set to enable default routes and reporting
+  # The admin API instance with only admin routes
   admin:
     image: momo/api
     build:
@@ -50,6 +51,7 @@ services:
     environment:
       - ENABLE_ADMIN_ROUTES=true # Only load admin routes
       - SKIP_DB_RESET=true # Here, we don't reset the DB; we do it in the other instance.
+      - EXPOSE_SWAGGER_UI=true # Just for local demo
     expose:
       - 8081
     ports:

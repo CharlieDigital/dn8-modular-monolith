@@ -23,4 +23,11 @@ public static class RuntimeEnv
     /// </summary>
     public static bool SkipDbReset =>
         Environment.GetEnvironmentVariable("SKIP_DB_RESET")?.Trim().ToLowerInvariant() == "true";
+
+    /// <summary>
+    /// Just for dev purposes, we want to expose this so we can see it locally.
+    /// /// </summary>
+    public static bool ExposeSwaggerUI =>
+        Environment.GetEnvironmentVariable("EXPOSE_SWAGGER_UI")?.Trim().ToLowerInvariant()
+        == "true";
 }
