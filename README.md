@@ -22,7 +22,7 @@ Watch the walkthrough deep-dive video:
 
 [![Deep-dive walkthrough of modular monoliths with .NET going through this codebase](https://github.com/user-attachments/assets/34c92310-d05d-4f52-846e-abcc42e82bdf)](https://www.youtube.com/watch?v=VEggfW0A_Oo)
 
-See the Google Slides: [A Practical Guid to Modular Monoliths with .NET (Slides)](https://docs.google.com/presentation/d/1rZUXGtdb7gTU5Ywvf80wlDddJAUp808-EHfJjhDPOU0/edit?usp=sharing)
+See the Google Slides: [A Practical Guide to Modular Monoliths with .NET (Slides)](https://docs.google.com/presentation/d/1rZUXGtdb7gTU5Ywvf80wlDddJAUp808-EHfJjhDPOU0/edit?usp=sharing)
 
 ## Organization
 
