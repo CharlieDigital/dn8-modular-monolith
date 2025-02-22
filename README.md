@@ -4,6 +4,8 @@ This repo is inspired by [a new paper](https://dl.acm.org/doi/pdf/10.1145/359385
 
 The objective is to provide real working code so that anyone can build a modular monolith in .NET that has great DX and is easy to partition, deploy, and scale in production.
 
+Think of this as a *scaffold* that takes out much of exploratory work you'd need to do to build monolithic backends that can be deployed modularly and scaled as if they were microservices.  The real magic can be summed up as separating the dev-time coding experience from the runtime deployment model by use of very simple principles that are easy to grasp.
+
 ## Read the Background
 
 .NET’s host runtime model and built-in dependency injection makes building scalable “modular monoliths” easier than ever. This lets teams — especially startups — move faster with less development, deployment, and operational friction while still maintaining many of the benefits of microservices such as independent scaling of services, isolation of responsibilities, and so on.
@@ -15,6 +17,12 @@ In short, the objective is to:
 - Have a monolithic codebase (can be multi-project; this example is just a single project) to simplify local setup and improve DX
 - Have a single runtime in development so that `dotnet run` brings up everything
 - Design our runtime so that we can use the same exact codebase, but deploy different sets of services to different hosts that we can route, secure, scale, and manage independently
+
+Watch the walkthrough deep-dive video:
+
+;[![https://github.com/user-attachments/assets/34c92310-d05d-4f52-846e-abcc42e82bdf]](https://www.youtube.com/watch?v=VEggfW0A_Oo)
+
+See the Google Slides: [A Practical Guid to Modular Monoliths with .NET (Slides)](https://docs.google.com/presentation/d/1rZUXGtdb7gTU5Ywvf80wlDddJAUp808-EHfJjhDPOU0/edit?usp=sharing)
 
 ## Organization
 
